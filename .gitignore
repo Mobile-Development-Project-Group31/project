@@ -1,0 +1,13 @@
+# Android Studio / IntelliJ
+/.idea/
+/.gradle/
+/local.properties
+*.iml
+/build/
+/captures/
+/.externalNativeBuild/
+/cxx/
+
+# MacOS- ja Windows-spesifiset tiedostot
+.DS_Store
+Thumbs.db
