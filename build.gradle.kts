@@ -5,6 +5,12 @@ plugins {
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.kapt) apply false
-    // Add the dependency for the Google services Gradle plugin
+
+    // Firebase
     id("com.google.gms.google-services") version "4.4.2" apply false
+
+    // NEW: Add these plugins for navigation and storage
+    id("androidx.navigation.safeargs.kotlin") version "2.8.9" apply false
+
+
 }
