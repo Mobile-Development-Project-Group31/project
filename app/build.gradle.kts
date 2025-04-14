@@ -2,9 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.hilt) // Apply Hilt plugin from version catalog
-    id("com.google.gms.google-services")
+    alias(libs.plugins.hilt) /* Apply Hilt plugin from version catalog */
     alias(libs.plugins.kapt) // Added to enable kapt for Hilt
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -69,6 +69,8 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
 
     // Firebase
+    implementation(libs.firebase.crashlytics.ktx)
+    implementation(libs.firebase.analytics.ktx)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.firestore.ktx)

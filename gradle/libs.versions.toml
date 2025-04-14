@@ -22,8 +22,15 @@ playServicesAuth = "21.3.0"
 firebaseStorage = "21.0.1"
 material3 = "1.3.1"
 composeRuntime = "1.7.8"
+firebaseAnalytics = "22.4.0"
+firebaseCrashlytics = "19.4.2"
+googleServices = "4.4.2"
+firebaseCrashlyticsGradle = "2.9.9"
+firebaseAnalyticsGradle = "22.4.0"
 
 [libraries]
+firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx", version.ref = "firebaseAnalytics" }
+firebase-crashlytics-ktx = { module = "com.google.firebase:firebase-crashlytics-ktx", version.ref = "firebaseCrashlytics" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-compose-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "composeRuntime" }
 androidx-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "materialIconsCore" }
@@ -64,3 +71,6 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlyticsGradle" }
+firebase-analytics = { id = "com.google.firebase.firebase-analytics", version.ref = "firebaseAnalyticsGradle" }
