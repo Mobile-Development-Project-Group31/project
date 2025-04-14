@@ -7,23 +7,36 @@ import androidx.navigation.compose.composable
 import com.example.advancedandroidcourse.presentation.auth.LoginScreen
 import com.example.advancedandroidcourse.presentation.auth.RegisterScreen
 import com.example.advancedandroidcourse.presentation.main.HomeScreen
-
-//Navigation with Jetpack Navigation Component
-// THIS IS NOT USED IN THIS DEMO APP, because the demo has only one view
+import com.example.advancedandroidcourse.presentation.main.MapScreen
+import com.example.advancedandroidcourse.presentation.main.ProfileScreen
+import com.example.advancedandroidcourse.presentation.main.SearchScreen
 
 @Composable
 fun AppNavHost(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screen.Login.route) {
+    NavHost(
+        navController = navController,
+        startDestination = Screen.Login.route
+    ) {
+        // Authentication Screens
         composable(Screen.Login.route) {
             LoginScreen(navController)
         }
         composable(Screen.Register.route) {
             RegisterScreen(navController)
         }
+
+        // Main App Screens
         composable(Screen.Home.route) {
             HomeScreen(navController)
         }
+        composable(Screen.Profile.route) {
+            ProfileScreen(navController)
+        }
+        composable(Screen.Map.route) {
+            MapScreen(navController)
+        }
+        composable(Screen.Search.route) {
+            SearchScreen(navController)
+        }
     }
 }
-
-
