@@ -22,7 +22,8 @@ fun HomeScreen(navController: NavController) {
         Screen.Home,
         Screen.Profile,
         Screen.Map,
-        Screen.Search
+        Screen.Search,
+        Screen.OrderHistory // Adding OrderHistory to the navigation drawer
     )
 
     ModalNavigationDrawer(
@@ -35,7 +36,7 @@ fun HomeScreen(navController: NavController) {
                     style = MaterialTheme.typography.titleLarge,
                     modifier = Modifier.padding(16.dp)
                 )
-                Divider()
+                HorizontalDivider()
 
                 // Drawer items
                 menuItems.forEach { screen ->
@@ -93,6 +94,9 @@ fun HomeScreen(navController: NavController) {
                     modifier = Modifier.padding(top = 16.dp)
                 ) {
                     Text("Get Started")
+                }
+                Button(onClick = { navController.navigate(Screen.Restaurant.route) }) {
+                    Text("Browse Restaurants")
                 }
             }
         }

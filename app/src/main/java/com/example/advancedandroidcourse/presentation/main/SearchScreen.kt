@@ -6,5 +6,5 @@ import androidx.navigation.NavController
 
 @Composable
 fun SearchScreen(navController: NavController) {
-    Text("Search Screen - To be implemented")
+    Text("Search com.example.advancedandroidcourse.navigation.Screen - To be implemented")
 }

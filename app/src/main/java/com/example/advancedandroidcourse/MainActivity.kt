@@ -14,7 +14,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.advancedandroidcourse.navigation.AppNavHost
 import com.example.advancedandroidcourse.ui.theme.AdvancedAndroidCourseTheme
+import dagger.hilt.android.AndroidEntryPoint
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
 
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

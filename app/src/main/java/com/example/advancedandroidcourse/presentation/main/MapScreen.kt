@@ -6,5 +6,5 @@ import androidx.navigation.NavController
 
 @Composable
 fun MapScreen(navController: NavController) {
-    Text("Map Screen - To be implemented")
+    Text("Map com.example.advancedandroidcourse.navigation.Screen - To be implemented")
 }

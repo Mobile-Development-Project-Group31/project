@@ -1,6 +1,5 @@
 package com.example.advancedandroidcourse.presentation.auth
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
