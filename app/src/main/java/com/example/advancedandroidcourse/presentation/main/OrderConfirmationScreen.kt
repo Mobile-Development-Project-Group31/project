@@ -22,6 +22,7 @@ import androidx.navigation.NavHostController
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.advancedandroidcourse.presentation.viewmodel.OrderViewModel
+import com.example.advancedandroidcourse.navigation.Screen
 
 @SuppressLint("UnrememberedGetBackStackEntry")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -68,10 +69,18 @@ fun OrderConfirmationScreen(navController: NavHostController) {
 
                 // Navigation button
                 Button(
-                    onClick = { navController.popBackStack() },
+                    onClick = {
+                        navController.navigate(Screen.Home.route) {
+                            // Clear entire back stack including order flow
+                            popUpTo(navController.graph.startDestinationId) {
+                                inclusive = true
+                            }
+                            launchSingleTop = true
+                        }
+                    },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Go Back")
+                    Text("Go Back to Home")
                 }
             }
         }

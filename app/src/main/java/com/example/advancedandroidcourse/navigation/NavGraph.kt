@@ -12,6 +12,8 @@ import com.example.advancedandroidcourse.presentation.auth.RegisterScreen
 import com.example.advancedandroidcourse.presentation.main.*
 import com.google.firebase.auth.FirebaseAuth
 
+
+
 @Composable
 fun AppNavHost(navController: NavHostController) {
     NavHost(
@@ -40,7 +42,7 @@ fun AppNavHost(navController: NavHostController) {
             MenuScreen(navController, restaurantId)
         }
 
-        // Checkout flow scoped
+
         navigation(
             startDestination = Screen.AddressAndPayment.route,
             route = "orderFlow"
@@ -51,6 +53,7 @@ fun AppNavHost(navController: NavHostController) {
             composable(Screen.OrderConfirmation.route) {
                 OrderConfirmationScreen(navController)
             }
+
         }
         }
     }
