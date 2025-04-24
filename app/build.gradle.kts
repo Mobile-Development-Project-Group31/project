@@ -85,6 +85,10 @@ dependencies {
 
     implementation("com.google.firebase:firebase-firestore-ktx:24.10.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
+
+    //googlemap
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    implementation("com.google.maps.android:maps-compose:2.11.4")
 }
 
 kapt {

@@ -29,6 +29,11 @@ import com.example.advancedandroidcourse.data.model.MenuItem
 import com.example.advancedandroidcourse.navigation.Screen
 import com.example.advancedandroidcourse.presentation.viewmodel.CartViewModel
 
+import androidx.compose.runtime.*
+import com.example.advancedandroidcourse.data.repository.FirestoreRepository
+import com.google.firebase.firestore.FirebaseFirestore
+
+
 @SuppressLint("UnrememberedGetBackStackEntry")
 @Composable
 fun MenuScreen(navController: NavHostController, restaurantId: String?) {
@@ -37,6 +42,7 @@ fun MenuScreen(navController: NavHostController, restaurantId: String?) {
         return
     }
 
+    /*
     // Use shared CartViewModel scoped to the root nav graph (startDestination: Screen.Login.route)
     val parentEntry = remember {
         navController.getBackStackEntry(Screen.Login.route)
@@ -49,6 +55,23 @@ fun MenuScreen(navController: NavHostController, restaurantId: String?) {
             MenuItem("2", "Fries", 4.99, "Crispy potato fries"),
             MenuItem("3", "Milkshake", 5.99, "Vanilla milkshake")
         )
+    }*/
+
+    val parentEntry = remember {
+        navController.getBackStackEntry(Screen.Login.route)
+    }
+    val viewModel: CartViewModel = hiltViewModel(parentEntry)
+
+    // Firestore
+    val repository = remember { FirestoreRepository(FirebaseFirestore.getInstance()) }
+    // Mutable state to store menu items
+    val menuItems = remember { mutableStateOf<List<MenuItem>>(emptyList()) }
+
+    // Load data when screen appears
+    LaunchedEffect(true) {
+        val restaurants = repository.getRestaurants()
+        val restaurant = restaurants.find { it.id == restaurantId }
+        menuItems.value = restaurant?.menus ?: emptyList()
     }
 
     Scaffold(
@@ -67,13 +90,14 @@ fun MenuScreen(navController: NavHostController, restaurantId: String?) {
         ) {
             item {
                 Text(
-                    "Menu for Restaurant $restaurantId",
+                    //"Menu for Restaurant $restaurantId",
+                    "Menu for Restaurant",
                     style = MaterialTheme.typography.headlineLarge,
                     modifier = Modifier.padding(16.dp)
                 )
             }
 
-            items(menuItems) { item ->
+            items(menuItems.value) { item ->
                 MenuItemCard(item = item, viewModel = viewModel)
             }
         }
