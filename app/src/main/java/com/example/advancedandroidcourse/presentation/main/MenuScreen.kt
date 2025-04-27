@@ -70,7 +70,7 @@ fun MenuScreen(navController: NavHostController, restaurantId: String?) {
     // Load data when screen appears
     LaunchedEffect(true) {
         val restaurants = repository.getRestaurants()
-        val restaurant = restaurants.find { it.id == restaurantId }
+        val restaurant = restaurants.find { it.id == restaurantId } //
         menuItems.value = restaurant?.menus ?: emptyList()
     }
 

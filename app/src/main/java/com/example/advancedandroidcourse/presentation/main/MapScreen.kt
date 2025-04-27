@@ -49,7 +49,7 @@ fun MapScreen(navController: NavController) {
 
     // Map UI
     Box(modifier = Modifier.fillMaxSize()) {
-        GoogleMap(
+        GoogleMap( //
             modifier = Modifier.fillMaxSize(),
             cameraPositionState = cameraPositionState,
             properties = MapProperties(isMyLocationEnabled = hasPermission),
