@@ -35,6 +35,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.advancedandroidcourse.navigation.Screen
+import com.google.firebase.auth.FirebaseAuth
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -164,7 +166,20 @@ fun ProfileScreen(navController: NavController) {
                     .padding(16.dp)
             ) {
                 Button(
-                    onClick = { /* Handle sign out */ },
+                    onClick = {
+                        // Sign out of Firebase
+                        FirebaseAuth.getInstance().signOut()
+
+                        // Navigate back to Login, clearing the back stack
+                        navController.navigate(Screen.Login.route) {
+                            // Pop everything up to the start destination (usually Login)
+                            popUpTo(navController.graph.startDestinationId) {
+                                inclusive = true
+                            }
+                            // Avoid multiple copies of Login on the stack
+                            launchSingleTop = true
+                        }
+                    },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("Sign Out")

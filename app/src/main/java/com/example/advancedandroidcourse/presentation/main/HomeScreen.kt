@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.advancedandroidcourse.navigation.Screen
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -47,8 +48,8 @@ fun HomeScreen(navController: NavController) {
                         selected = false,
                         onClick = {
                             scope.launch { drawerState.close() }
-
                             if (screen == Screen.OrderHistory) {
+
                                 // Special handling for OrderHistory
                                 navController.navigate(Screen.OrderHistory.createRoute("test_user")) {
                                     popUpTo(Screen.Home.route) {
@@ -58,7 +59,6 @@ fun HomeScreen(navController: NavController) {
                                     restoreState = true
                                 }
                             } else {
-
                                 navController.navigate(screen.route) {
                                     popUpTo(Screen.Home.route) {
                                         saveState = true
@@ -96,14 +96,10 @@ fun HomeScreen(navController: NavController) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Welcome to Our App!",
+                    text = "Welcome to Ruokkara",
                     style = MaterialTheme.typography.headlineMedium
                 )
-                Text(
-                    text = "Home screen content will go here",
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.padding(vertical = 16.dp)
-                )
+
                 Button(
                     onClick = { /* Add your action here */ },
                     modifier = Modifier.padding(top = 16.dp)
@@ -117,3 +113,6 @@ fun HomeScreen(navController: NavController) {
         }
     }
 }
+
+
+

@@ -2,6 +2,7 @@ package com.example.advancedandroidcourse.data.repository
 
 import android.util.Log
 import com.example.advancedandroidcourse.data.model.MenuItem
+import com.example.advancedandroidcourse.data.model.Order
 import com.example.advancedandroidcourse.data.model.Restaurant
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
@@ -11,7 +12,7 @@ class FirestoreRepository(private val db: FirebaseFirestore) {
     suspend fun getRestaurants(): List<Restaurant> {
         return try {
             val snapshot = db.collection("restaurants").get().await() //
-                snapshot.documents.mapNotNull { doc ->
+            snapshot.documents.mapNotNull { doc ->
                 val id = doc.id
                 val name = doc.getString("name") ?: return@mapNotNull null
                 val cuisine = doc.getString("cuisine") ?: ""
@@ -36,3 +37,5 @@ class FirestoreRepository(private val db: FirebaseFirestore) {
         }
     }
 }
+
+

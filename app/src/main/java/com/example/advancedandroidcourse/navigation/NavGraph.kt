@@ -13,25 +13,34 @@ import com.example.advancedandroidcourse.presentation.main.*
 import com.google.firebase.auth.FirebaseAuth
 
 
-
 @Composable
-fun AppNavHost(navController: NavHostController) {
+        /*fun AppNavHost(navController: NavHostController) {
+            NavHost(
+                navController = navController,
+                startDestination = Screen.Login.route
+            ) {*/
+fun AppNavHost(
+    navController: NavHostController,
+    startDestination: String
+) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Login.route
+        startDestination = startDestination
     ) {
         composable(Screen.Login.route) { LoginScreen(navController) }
         composable(Screen.Register.route) { RegisterScreen(navController) }
         composable(Screen.Home.route) { HomeScreen(navController) }
         composable(Screen.Profile.route) { ProfileScreen(navController) }
         composable(Screen.Map.route) { MapScreen(navController) }
-        //composable(Screen.Search.route) { SearchScreen(navController) }
+//composable(Screen.Search.route) { SearchScreen(navController) }
         composable(Screen.Restaurant.route) { RestaurantScreen(navController) }
         composable(Screen.Cart.route) { CartScreen(navController) }
 
         composable(
             route = Screen.OrderHistory.route,
-            arguments = listOf(navArgument("userId") { type = NavType.StringType }) // tell the app that this screen expect userid from nav
+            arguments = listOf(navArgument("userId") {
+                type = NavType.StringType
+            }) // tell the app that this screen expect userid from nav
         ) { backStackEntry -> // Gets the userId from the URL
             val userId = backStackEntry.arguments?.getString("userId") ?: ""
             OrderHistoryScreen(userId = userId) // Pass the userId to  OrderHistoryScreen
@@ -58,6 +67,6 @@ fun AppNavHost(navController: NavHostController) {
             }
 
         }
-        }
     }
+}
 

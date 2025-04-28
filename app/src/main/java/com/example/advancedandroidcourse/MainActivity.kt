@@ -11,8 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.example.advancedandroidcourse.navigation.AppNavHost
+import com.example.advancedandroidcourse.navigation.Screen
 import com.example.advancedandroidcourse.ui.theme.AdvancedAndroidCourseTheme
 import dagger.hilt.android.AndroidEntryPoint
 import com.google.firebase.FirebaseApp
@@ -24,10 +26,23 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+        val auth = FirebaseAuth.getInstance()
+        val startDestination = if (auth.currentUser != null) {
+
+            Screen.Home.route
+        } else {
+
+            Screen.Login.route
+        }
         setContent {
             AdvancedAndroidCourseTheme {
                 val navController = rememberNavController()
-                AppNavHost(navController = navController)
+
+                AppNavHost(
+                    navController = navController,
+                    startDestination = startDestination
+                )
             }
         }
     }

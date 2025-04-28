@@ -2,6 +2,7 @@ package com.example.advancedandroidcourse.presentation.main
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,16 +19,20 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.advancedandroidcourse.data.model.Order
+import com.example.advancedandroidcourse.data.repository.FirestoreRepository
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OrderHistoryScreen(userId: String) {
+
     // A list to hold orders
     val orders = remember { mutableStateListOf<Order>() }
 
@@ -89,3 +94,6 @@ fun OrderCard(order: Order) { // Create card for each order.
         }
     }
 }
+
+
+
