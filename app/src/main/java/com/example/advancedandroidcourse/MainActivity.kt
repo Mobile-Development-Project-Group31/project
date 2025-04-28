@@ -11,37 +11,39 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import com.example.advancedandroidcourse.navigation.AppNavHost
+import com.example.advancedandroidcourse.navigation.Screen
 import com.example.advancedandroidcourse.ui.theme.AdvancedAndroidCourseTheme
+import dagger.hilt.android.AndroidEntryPoint
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
 
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
+
+        val auth = FirebaseAuth.getInstance()
+        val startDestination = if (auth.currentUser != null) {
+
+            Screen.Home.route
+        } else {
+
+            Screen.Login.route
+        }
         setContent {
             AdvancedAndroidCourseTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                val navController = rememberNavController()
+
+                AppNavHost(
+                    navController = navController,
+                    startDestination = startDestination
+                )
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hellosunojopa $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AdvancedAndroidCourseTheme {
-        Greeting("Android")
     }
 }
