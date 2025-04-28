@@ -30,10 +30,10 @@ import com.example.advancedandroidcourse.navigation.Screen
 fun OrderConfirmationScreen(navController: NavHostController) {
     // Get parent back stack entry for shared ViewModel
     val parentEntry = remember(navController) {
-        navController.getBackStackEntry("orderFlow")
+        //navController.getBackStackEntry("orderFlow")
+        navController.getBackStackEntry(Screen.Home.route)
     }
     val orderViewModel: OrderViewModel = hiltViewModel(parentEntry)
-
     // Collect order details from ViewModel
     val orderDetails by orderViewModel.orderDetails.collectAsState()
 

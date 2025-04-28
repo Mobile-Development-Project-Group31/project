@@ -9,14 +9,17 @@ sealed class Screen(val route: String) {
     object Home : Screen("home")
     object Profile : Screen("profile")
     object Map : Screen("map")
-    object Search : Screen("search")
-    object OrderHistory : Screen("order_history")
+    //object Search : Screen("search")
+    object OrderHistory : Screen("order_history/{userId}") {
+        fun createRoute(userId: String): String = "order_history/$userId"
+    }
 
     // New com.example.advancedandroidcourse.data.model.Restaurant Flow Screens
     object Restaurant : Screen("restaurant")
     object Menu : Screen("menu/{restaurantId}") {
         fun createRoute(restaurantId: String): String = "menu/$restaurantId"
     }
+
     object Cart : Screen("cart")
 
 

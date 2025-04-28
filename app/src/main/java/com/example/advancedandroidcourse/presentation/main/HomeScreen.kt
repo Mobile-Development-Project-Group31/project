@@ -22,7 +22,7 @@ fun HomeScreen(navController: NavController) {
         Screen.Home,
         Screen.Profile,
         Screen.Map,
-        Screen.Search,
+        //Screen.Search,
         Screen.OrderHistory // Adding OrderHistory to the navigation drawer
     )
 
@@ -41,16 +41,31 @@ fun HomeScreen(navController: NavController) {
                 // Drawer items
                 menuItems.forEach { screen ->
                     NavigationDrawerItem(
-                        label = { Text(screen.route) },
+                        label = { Text(
+                            if (screen is Screen.OrderHistory) "Order History"
+                            else screen.route) },
                         selected = false,
                         onClick = {
                             scope.launch { drawerState.close() }
-                            navController.navigate(screen.route) {
-                                popUpTo(Screen.Home.route) {
-                                    saveState = true
+
+                            if (screen == Screen.OrderHistory) {
+                                // Special handling for OrderHistory
+                                navController.navigate(Screen.OrderHistory.createRoute("test_user")) {
+                                    popUpTo(Screen.Home.route) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
                                 }
-                                launchSingleTop = true
-                                restoreState = true
+                            } else {
+
+                                navController.navigate(screen.route) {
+                                    popUpTo(Screen.Home.route) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
                             }
                         }
                     )

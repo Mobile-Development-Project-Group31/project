@@ -1,15 +1,16 @@
 // presentation/viewmodel/CartViewModel.kt
 package com.example.advancedandroidcourse.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.advancedandroidcourse.data.model.CartItem
 import com.example.advancedandroidcourse.data.model.MenuItem
+import com.example.advancedandroidcourse.data.model.Order
+import com.example.advancedandroidcourse.data.model.OrderDetails
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -44,5 +45,30 @@ class CartViewModel @Inject constructor() : ViewModel() {
     // Method to clear the entire cart
     fun clearCart() {
         _cartItems.value = emptyList()
+    }
+
+    fun placeOrder(orderDetails: OrderDetails, userId: String, totalAmount: Double) { // Get the Firebase Firestore database
+        val db = FirebaseFirestore.getInstance()
+
+        Log.d("DEBUG", "Placing order with totalAmount: $totalAmount")
+        val newOrder = Order( // Create a new Order object
+            orderId = db.collection("orders").document().id, // Generate a unique ID for the order
+            orderStatus = "Pending", // Initial status
+            totalAmount = totalAmount,
+            address = orderDetails.address.mainAddress, // you can customize
+            paymentMethod = orderDetails.paymentMethod.name, // CARD or CASH
+            userId = userId
+        )
+
+        db.collection("orders") // Save the new order into Firestore under "orders" collection
+            .document(newOrder.orderId)
+            .set(newOrder)
+            .addOnSuccessListener { // Runs when save is successful
+                Log.d("Firestore", "Order placed successfully")
+                clearCart() // Clear the cart after placing order
+            }
+            .addOnFailureListener { e -> // Runs if there’s an error
+                Log.e("Firestore", "Failed to place order: ${e.message}")
+            }
     }
 }

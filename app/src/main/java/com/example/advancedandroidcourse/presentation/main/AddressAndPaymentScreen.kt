@@ -32,6 +32,7 @@ import androidx.navigation.NavHostController
 import com.example.advancedandroidcourse.data.model.Address
 import com.example.advancedandroidcourse.data.model.PaymentMethod
 import com.example.advancedandroidcourse.navigation.Screen
+import com.example.advancedandroidcourse.presentation.viewmodel.CartViewModel
 import com.example.advancedandroidcourse.presentation.viewmodel.OrderViewModel
 
 @SuppressLint("UnrememberedGetBackStackEntry")
@@ -39,10 +40,11 @@ import com.example.advancedandroidcourse.presentation.viewmodel.OrderViewModel
 @Composable
 fun AddressAndPaymentScreen(navController: NavHostController) {
     val parentEntry = remember(navController) {
-        navController.getBackStackEntry("orderFlow")
+        navController.getBackStackEntry(Screen.Home.route)
     }
     // Retrieve ViewModel scoped to the parent navigation route
     val orderViewModel: OrderViewModel = hiltViewModel(parentEntry)
+    val cartViewModel: CartViewModel = hiltViewModel(parentEntry)
 
     // Local states for user inputs
     var mainAddress by remember { mutableStateOf("") }
@@ -137,7 +139,12 @@ fun AddressAndPaymentScreen(navController: NavHostController) {
             Button(
                 onClick = {
 
-
+                    // 1. Save the order into Firestore
+                    cartViewModel.placeOrder(
+                        orderViewModel.orderDetails.value,
+                        "test_user",
+                        totalAmount = cartViewModel.totalPrice
+                    )
 
                     // Navigate to confirmation screen
                     navController.navigate(Screen.OrderConfirmation.route)

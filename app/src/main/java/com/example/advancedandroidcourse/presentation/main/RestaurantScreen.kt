@@ -83,7 +83,7 @@ fun RestaurantScreen(navController: NavHostController) {
                 Box(
                     modifier = Modifier
                         .weight(1f)
-                        .height(48.dp) // Fix height for all buttons
+                        .height(48.dp) // Fix height for all buttons for clean view
                 ) {
                     Button(
                         onClick = { selectedCategory.value = category },

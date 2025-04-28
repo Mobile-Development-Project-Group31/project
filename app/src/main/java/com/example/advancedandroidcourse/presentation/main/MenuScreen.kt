@@ -1,6 +1,7 @@
 package com.example.advancedandroidcourse.presentation.main
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -42,23 +43,8 @@ fun MenuScreen(navController: NavHostController, restaurantId: String?) {
         return
     }
 
-    /*
-    // Use shared CartViewModel scoped to the root nav graph (startDestination: Screen.Login.route)
     val parentEntry = remember {
-        navController.getBackStackEntry(Screen.Login.route)
-    }
-    val viewModel: CartViewModel = hiltViewModel(parentEntry)
-
-    val menuItems = remember {
-        listOf(
-            MenuItem("1", "Cheeseburger", 9.99, "Classic beef burger"),
-            MenuItem("2", "Fries", 4.99, "Crispy potato fries"),
-            MenuItem("3", "Milkshake", 5.99, "Vanilla milkshake")
-        )
-    }*/
-
-    val parentEntry = remember {
-        navController.getBackStackEntry(Screen.Login.route)
+        navController.getBackStackEntry(Screen.Home.route)
     }
     val viewModel: CartViewModel = hiltViewModel(parentEntry)
 
@@ -123,6 +109,7 @@ private fun MenuItemCard(item: MenuItem, viewModel: CartViewModel) {
             }
             FilledTonalButton(onClick = {
                 viewModel.addToCart(item)
+                Log.d("MenuScreen", "Added to cart: ${item.name}, current cart: ${viewModel.cartItems.value}") // Then log
             }) {
                 Text("Add to Cart")
             }

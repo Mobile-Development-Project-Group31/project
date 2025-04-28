@@ -25,13 +25,16 @@ fun AppNavHost(navController: NavHostController) {
         composable(Screen.Home.route) { HomeScreen(navController) }
         composable(Screen.Profile.route) { ProfileScreen(navController) }
         composable(Screen.Map.route) { MapScreen(navController) }
-        composable(Screen.Search.route) { SearchScreen(navController) }
+        //composable(Screen.Search.route) { SearchScreen(navController) }
         composable(Screen.Restaurant.route) { RestaurantScreen(navController) }
         composable(Screen.Cart.route) { CartScreen(navController) }
 
-        composable(Screen.OrderHistory.route) {
-            val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
-            OrderHistoryScreen(userId = userId)
+        composable(
+            route = Screen.OrderHistory.route,
+            arguments = listOf(navArgument("userId") { type = NavType.StringType }) // tell the app that this screen expect userid from nav
+        ) { backStackEntry -> // Gets the userId from the URL
+            val userId = backStackEntry.arguments?.getString("userId") ?: ""
+            OrderHistoryScreen(userId = userId) // Pass the userId to  OrderHistoryScreen
         }
 
         composable(
